@@ -22,9 +22,10 @@ const fetchCoordsByIP = function(ip,callback) {
     if (error) {
       callback(error,null);
     } else {
-      const locationData = JSON.parse(body);
-      const latLon = {latitude: locationData["data"].latitude, longitude: locationData["data"].longitude};
-      callback(null, latLon);
+      const locationData = JSON.parse(body).data;
+      const {latitude, longitude} = locationData; 
+     // const latLon = {latitude: locationData["data"].latitude, longitude: locationData["data"].longitude};
+      callback(null, {latitude, longitude});
     }
     if (response.statusCode !== 200) {
       const msg = `It didn't work! Error: Status Code ${response.statusCode} when fetching Coordinates for IP. Response: ${body}`;
@@ -56,12 +57,12 @@ const nextISSTimesForMyLocation = function (callback) {
       return callback(error, null);
     }
 
-    fetchCoordsByIP('69.9.94.219', (error, coords) => {
+    fetchCoordsByIP(ip, (error, coords) => {
       if (error) {
         return callback(error, null);;
       }
 
-      fetchISSFlyOverTimes({ latitude: '49.27670', longitude: '-123.13000' }, (error, nextPasses) => {
+      fetchISSFlyOverTimes(coords, (error, nextPasses) => {
         if (error) {
           return callback(error, null);;
         }

@@ -16,7 +16,7 @@ const {nextISSTimesForMyLocation } = require(`./iss`);
 //   console.log('It worked! Returned coordinates', coords);
 // });
 
-// fetchISSFlyOverTimes({ latitude: 'F', longitude: '-123.13000' } ,(error,passTime) => {
+// fetchISSFlyOverTimes({ latitude: '50.98700', longitude: '-113.96340' } ,(error,passTime) => {
 //   if (error) {
 //     console.log('It didn\'t work!', error);
 //     return console.log
